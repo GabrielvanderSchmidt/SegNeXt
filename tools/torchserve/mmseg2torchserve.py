@@ -24,22 +24,22 @@ def mmseg2torchserve(
     `.mar`.
 
     Args:
-        config_file:
+        --config:
             In MMSegmentation config format.
             The contents vary for each task repository.
-        checkpoint_file:
+        --checkpoint:
             In MMSegmentation checkpoint format.
             The contents vary for each task repository.
-        output_folder:
+        --output-folder:
             Folder where `{model_name}.mar` will be created.
             The file created will be in TorchServe archive format.
-        model_name:
+        --model-name:
             If not None, used for naming the `{model_name}.mar` file
             that will be created under `output_folder`.
             If None, `{Path(checkpoint_file).stem}` will be used.
-        model_version:
+        --model-version:
             Model's version.
-        force:
+        --force, -f:
             If True, if there is an existing `{model_name}.mar`
             file under `output_folder` it will be overwritten.
     """
@@ -71,8 +71,8 @@ def mmseg2torchserve(
 def parse_args():
     parser = ArgumentParser(
         description='Convert mmseg models to TorchServe `.mar` format.')
-    parser.add_argument('config', type=str, help='config file path')
-    parser.add_argument('checkpoint', type=str, help='checkpoint file path')
+    parser.add_argument('--config', type=str, help='config file path')
+    parser.add_argument('--checkpoint', type=str, help='checkpoint file path')
     parser.add_argument(
         '--output-folder',
         type=str,
