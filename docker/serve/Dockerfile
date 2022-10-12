@@ -51,7 +51,7 @@ RUN mkdir /home/model-server/model-store
 WORKDIR /home
 RUN git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
 # To use Cityscapes:
-RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/b9d54d11-5526-4b7c-9b7d-cb1a52ac3f92/segnext_large_1024x1024_city_160k.pth \
+RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/9939c350-a87f-4b48-8ab6-ac05dcdd4c44/segnext_large_1024x1024_city_160k.pth \
     && mv segnext_large_1024x1024_city_160k.pth /home/model-server/model-store/city-model.pth \
     && mv SegNeXt/local_configs/segnext/large/segnext.large.1024x1024.city.160k.py /home/model-server/model-store/city-configs.py
 # Or, to use ADE20K:
@@ -75,7 +75,7 @@ RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/b9d54d11-5526
 #    --model-name segnext-city
 # ----------------------
 
-#RUN chown -R model-server /home/model-server/model-store
+RUN chown -R model-server /home/model-server/model-store
 
 EXPOSE 8080 8081 8082
 
