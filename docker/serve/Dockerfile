@@ -68,14 +68,14 @@ RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/b9d54d11-5526
 
 # -- Create .mar file -- (WIP) 
 # docker exec -it segnext-serve bash
-# python SegNeXt/tools/torchserve/mmseg2torchserve.py \
+# python /home/SegNeXt/tools/torchserve/mmseg2torchserve.py \
 #    --config "/home/model-server/model-store/city-configs.py" \
 #    --checkpoint "/home/model-server/model-store/city-model.pth" \
 #    --output-folder "/home/model-server/model-store/" \
 #    --model-name segnext-city
 # ----------------------
 
-RUN chown -R model-server /home/model-server/model-store
+#RUN chown -R model-server /home/model-server/model-store
 
 EXPOSE 8080 8081 8082
 
