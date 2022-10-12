@@ -1,8 +1,8 @@
 _base_ = [
-    '../../_base_/models/mscan.py',
-    '../../_base_/datasets/ade20k_repeat.py',
-    '../../_base_/default_runtime.py',
-    '../../_base_/schedules/schedule_160k_adamw.py'
+    '/home/SegNeXt/local_configs/_base_/models/mscan.py',
+    '/home/SegNeXt/local_configs/_base_/datasets/ade20k_repeat.py',
+    '/home/SegNeXt/local_configs/_base_/default_runtime.py',
+    '/home/SegNeXt/local_configs/_base_/schedules/schedule_160k_adamw.py'
 ]
 # model settings
 norm_cfg = dict(type='SyncBN', requires_grad=True)

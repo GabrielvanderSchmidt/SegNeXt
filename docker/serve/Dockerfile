@@ -62,7 +62,7 @@ RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/b9d54d11-5526
 # -----------------------------------------------
 
 # -- Move SegNeXt/configs/_base_/ to /home/_base_ --
-RUN mv SegNeXt/configs/_base_/ /home/_base_/
+#RUN mv SegNeXt/configs/_base_/ /home/_base_/ # <- Error had nothing to do with this, it was a relative path local_configs/segnext/large/segnext...160k.py leading to a different folder
 # Anything else that needs to be moved?
 # --------------------------------------------------
 
@@ -70,7 +70,7 @@ RUN mv SegNeXt/configs/_base_/ /home/_base_/
 # docker exec -it segnext-serve bash
 # python SegNeXt/tools/torchserve/mmseg2torchserve.py \
 #    --config "/home/model-server/model-store/city-configs.py" \
-#    --checkpoint "/home/model-server/model-store/ade-model.pth" \
+#    --checkpoint "/home/model-server/model-store/city-model.pth" \
 #    --output-folder "/home/model-server/model-store/" \
 #    --model-name segnext-city
 # ----------------------
