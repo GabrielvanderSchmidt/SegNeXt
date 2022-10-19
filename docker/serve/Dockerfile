@@ -50,8 +50,12 @@ RUN mkdir /home/model-server/model-store
 # -- Clone modified repository and model files --
 WORKDIR /home
 RUN git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
+# Must build container with --no-cache option, otherwise you will be stuck with older commits.
+# -----------------------------------------------
+
+
 # To use Cityscapes:
-RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/9939c350-a87f-4b48-8ab6-ac05dcdd4c44/segnext_large_1024x1024_city_160k.pth \
+RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/151d76fd-2917-430a-9041-859cee0bf512/segnext_large_1024x1024_city_160k.pth \
     && mv segnext_large_1024x1024_city_160k.pth /home/model-server/model-store/city-model.pth \
     && mv SegNeXt/local_configs/segnext/large/segnext.large.1024x1024.city.160k.py /home/model-server/model-store/city-configs.py
 # Or, to use ADE20K:
@@ -68,11 +72,12 @@ RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/9939c350-a87f
 
 # -- Create .mar file -- (WIP) 
 # docker exec -it segnext-serve bash
-# python /home/SegNeXt/tools/torchserve/mmseg2torchserve.py \
-#    --config "/home/model-server/model-store/city-configs.py" \
-#    --checkpoint "/home/model-server/model-store/city-model.pth" \
-#    --output-folder "/home/model-server/model-store/" \
-#    --model-name segnext-city
+RUN python /home/SegNeXt/tools/torchserve/mmseg2torchserve.py \
+    --config "/home/model-server/model-store/city-configs.py" \
+    --checkpoint "/home/model-server/model-store/city-model.pth" \
+    --output-folder "/home/model-server/model-store/" \
+    --model-name segnext-city
+# Do we still need to register the model, or does the config.properties -> load_models=all do that already?
 # ----------------------
 
 RUN chown -R model-server /home/model-server/model-store
