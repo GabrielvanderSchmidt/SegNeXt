@@ -55,8 +55,7 @@ RUN git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
 
 
 # To use Cityscapes:
-RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/151d76fd-2917-430a-9041-859cee0bf512/segnext_large_1024x1024_city_160k.pth \
-    && mv segnext_large_1024x1024_city_160k.pth /home/model-server/model-store/city-model.pth \
+RUN wget --no-verbose https://cloud.tsinghua.edu.cn/seafhttp/files/3eefc3ea-708f-4032-a236-6668ea9bb3d2/segnext_large_1024x1024_city_160k.pth \
     && mv SegNeXt/local_configs/segnext/large/segnext.large.1024x1024.city.160k.py /home/model-server/model-store/city-configs.py
 # Or, to use ADE20K:
 #RUN apt-get install wget \
