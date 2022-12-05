@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 
 import cv2
 
+import mmcv
 from mmseg.apis import inference_segmentor, init_segmentor
 from mmseg.core.evaluation import get_palette
 
@@ -52,8 +53,12 @@ def main():
         'At least one output should be enabled.'
 
     # build the model from a config file and a checkpoint file
-    model = init_segmentor(args.config, args.checkpoint, device=args.device)
-
+    config = mmcv.Config.fromfile(args.config)
+    config["norm_cfg"]["type"] = "BN"
+    config["model"]["backbone"]["norm_cfg"]["type"] = "BN"
+    config["model"]["decode_head"]["norm_cfg"]["type"] = "BN"
+    config["model"]["auxiliary_head"]["norm_cfg"]["type"] = "BN"
+    model = init_segmentor(config, args.checkpoint, device=args.device)
     # build input video
     cap = cv2.VideoCapture(args.video)
     assert (cap.isOpened())
