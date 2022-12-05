@@ -83,9 +83,9 @@ RUN git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
 
 #EXPOSE 8080 8081 8082
 
-USER model-server
-WORKDIR /home/model-server
-ENV TEMP=/home/model-server/tmp
+#USER model-server
+#WORKDIR /home/model-server
+#ENV TEMP=/home/model-server/tmp
 
 # -- Added to (hopefully) run only on CPU --
 RUN export FORCE_CUDA=0
