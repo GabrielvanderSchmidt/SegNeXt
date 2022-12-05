@@ -94,5 +94,5 @@ RUN export CUDA_VISIBLE_DEVICES=""
 # When running it directly, run with --device cpu option.
 # ------------------------------------------
  
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["serve"]
+#ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+#CMD ["serve"]
