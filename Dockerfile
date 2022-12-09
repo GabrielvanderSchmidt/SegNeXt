@@ -14,6 +14,12 @@ RUN rm /etc/apt/sources.list.d/nvidia-ml.list
 # ----------------------------
 # (from https://github.com/NVIDIA/nvidia-docker/issues/1632)
 
+# -- Clone modified repository and model files --
+WORKDIR /home
+RUN git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
+# Must build container with --no-cache option, otherwise you will be stuck with older commits.
+
+
 RUN apt-get update \
     && apt-get install wget -y \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
@@ -22,7 +28,11 @@ RUN apt-get update \
     openjdk-11-jre-headless \
     # MMDet Requirements
     ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    mkdir SegNeXt/checkpoints \
+    && wget https://download.openmmlab.com/mmsegmentation/v0.5/pspnet/pspnet_r50-d8_512x1024_40k_cityscapes/pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth -P SegNeXt/checkpoints
+
+    
 
 ENV PATH="/opt/conda/bin:$PATH"
 RUN export FORCE_CUDA=1
@@ -47,10 +57,6 @@ RUN pip install mmsegmentation==${MMSEG}
 #COPY config.properties /home/model-server/config.properties
 #RUN mkdir /home/model-server/model-store 
 
-# -- Clone modified repository and model files --
-WORKDIR /home
-RUN git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
-# Must build container with --no-cache option, otherwise you will be stuck with older commits.
 # -----------------------------------------------
 
 
@@ -96,3 +102,4 @@ RUN export CUDA_VISIBLE_DEVICES=""
  
 #ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 #CMD ["serve"]
+#CMD bash # open terminal to run container indefinitely
