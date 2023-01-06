@@ -14,14 +14,14 @@ RUN rm /etc/apt/sources.list.d/nvidia-ml.list
 # ----------------------------
 # (from https://github.com/NVIDIA/nvidia-docker/issues/1632)
 
-# -- Clone modified repository and model files --
 WORKDIR /home
-RUN git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
 # Must build container with --no-cache option, otherwise you will be stuck with older commits.
 
-
+# -- Clone modified repository and model files --
 RUN apt-get update \
     && apt-get install wget -y \
+    && apt-get install git -y \
+    && git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
     ca-certificates \
     g++ \
