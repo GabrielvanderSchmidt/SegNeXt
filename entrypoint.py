@@ -20,4 +20,4 @@ while True:
                print("{now.strftime('%Y-%m-%d %H:%M:%S')}\t- Output file {os.path.join(root, 'segmented', file)} is size {filesize} bytes.")
            s2 = subprocess.run("mv", os.path.join(root, "original/todo", file), os.path.join(root, "original/done", file))
            print("{now.strftime('%Y-%m-%d %H:%M:%S')}\t- Moved input file {os.path.join(root, 'original/todo', file)} to {os.path.join(root, 'original/done', file)}.")
-    time.sleep(30)
+   time.sleep(30)
