@@ -1,3 +1,5 @@
+print("RUNNING ENTRYPOINT.PY\n\n\n")
+
 import os
 import time
 import subprocess
