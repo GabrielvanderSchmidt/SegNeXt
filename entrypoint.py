@@ -16,7 +16,7 @@ while True:
        if file.endswith(".avi") and os.path.isfile(os.path.join(root, "original/todo", file)):
            start = datetime.now()
            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Segmenting {os.path.join(root, 'original/todo', file)}...")
-           s1 = subprocess.run("python3", os.path.join(segnext, "demo/video_demo.py"), os.path.join(root, "original/todo", file), os.path.join(segnext, "configs", model), os.path.join(segnext, "checkpoints", check_model), '--device="cpu"', f"--output-file={os.path.join(root, 'segmented', file)}")
+           s1 = subprocess.run("python3", os.path.join(segnext, "demo/video_demo.py"), os.path.join(root, "original/todo", file), os.path.join(segnext, "configs", conf_model), os.path.join(segnext, "checkpoints", check_model), '--device="cpu"', f"--output-file={os.path.join(root, 'segmented', file)}")
            end = datetime.now()
            delta = end - start
            filesize = os.path.getsize(os.path.join(root, "segmented", file))
