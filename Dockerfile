@@ -32,8 +32,8 @@ RUN apt-get update \
     # Download pretrained model checkpoint
     && mkdir SegNeXt/checkpoints \
     && mkdir -p videos/{original/{todo,done},segmented} \
-    && wget https://download.openmmlab.com/mmsegmentation/v0.5/pspnet/pspnet_r50-d8_512x1024_40k_cityscapes/pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth -P SegNeXt/checkpoints
-
+    && wget https://download.openmmlab.com/mmsegmentation/v0.5/pspnet/pspnet_r50-d8_512x1024_40k_cityscapes/pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth -P SegNeXt/checkpoints \
+    && wget https://download.openmmlab.com/mmsegmentation/v0.5/pspnet/pspnet_r18b-d8_512x1024_80k_cityscapes/pspnet_r18b-d8_512x1024_80k_cityscapes_20201226_063116-26928a60.pth -P SegNeXt/checkpoints
     
 
 ENV PATH="/opt/conda/bin:$PATH"
