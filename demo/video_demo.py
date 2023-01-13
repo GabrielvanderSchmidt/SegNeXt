@@ -7,6 +7,8 @@ import mmcv
 from mmseg.apis import inference_segmentor, init_segmentor
 from mmseg.core.evaluation import get_palette
 
+import pickle
+
 
 def main():
     parser = ArgumentParser()
@@ -54,10 +56,11 @@ def main():
 
     # build the model from a config file and a checkpoint file
     config = mmcv.Config.fromfile(args.config)
-    config["norm_cfg"]["type"] = "BN"
-    config["model"]["backbone"]["norm_cfg"]["type"] = "BN"
-    config["model"]["decode_head"]["norm_cfg"]["type"] = "BN"
-    config["model"]["auxiliary_head"]["norm_cfg"]["type"] = "BN"
+    if args.device == "cpu":
+        config["norm_cfg"]["type"] = "BN"
+        config["model"]["backbone"]["norm_cfg"]["type"] = "BN"
+        config["model"]["decode_head"]["norm_cfg"]["type"] = "BN"
+        config["model"]["auxiliary_head"]["norm_cfg"]["type"] = "BN"
     model = init_segmentor(config, args.checkpoint, device=args.device)
     # build input video
     cap = cv2.VideoCapture(args.video)
@@ -82,6 +85,7 @@ def main():
 
     # start looping
     try:
+        results = []
         while True:
             flag, frame = cap.read()
             if not flag:
@@ -89,6 +93,7 @@ def main():
 
             # test a single image
             result = inference_segmentor(model, frame)
+            results.append(result)
 
             # blend raw image and prediction
             draw_img = model.show_result(
@@ -111,6 +116,10 @@ def main():
         if writer:
             writer.release()
         cap.release()
+        if results and args.output_file is not None:
+            file_name = args.output_file.split(".")[0] if "." in args.output_file else args.output_file
+            with open(f"{file_name}.inferences", "w") as inference_file:
+                pickle.dump(results, inference_file)
 
 
 if __name__ == '__main__':
