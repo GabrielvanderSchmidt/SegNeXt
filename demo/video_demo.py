@@ -118,7 +118,7 @@ def main():
         cap.release()
         if results and args.output_file is not None:
             file_name = args.output_file.split(".")[0] if "." in args.output_file else args.output_file
-            with open(f"{file_name}.inferences", "w") as inference_file:
+            with open(f"{file_name}.inferences", "wb") as inference_file:
                 pickle.dump(results, inference_file)
 
 

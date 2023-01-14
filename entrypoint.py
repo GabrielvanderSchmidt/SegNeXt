@@ -20,6 +20,7 @@ models = [
 while True:
     for file in os.listdir(os.path.join(root, "original/todo")):
         print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Checking file {file}")
+        
         for model_name, model_check, model_conf in models:
             if file.endswith(".avi") and os.path.isfile(os.path.join(root, "original/todo", file)):
                 start = datetime.now()
@@ -31,13 +32,26 @@ while True:
 
                 end = datetime.now()
                 delta = end - start
-                filesize = os.path.getsize(os.path.join(root, "segmented", file))
-                if filesize == 0:
+                filesize = None if os.path.isfile(os.path.join(root, "segmented", file)) else if os.path.getsize(os.path.join(root, "segmented", file))
+                inference_file = (file.split(".")[0] if "." in file else file) + ".inferences"
+                if filesize is None:
+                    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- ERROR: Model {model_name} did not produce the expected output file {os.path.join(root, 'segmented', file)}!")
+                    continue # Replace with exit() in the future?
+                elif filesize == 0:
                     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- ERROR: Output file {os.path.join(root, 'segmented', file)} is size 0!")
+                    continue # Replace with exit() in the future?
                 else:
                     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Output file {os.path.join(root, 'segmented', file)} is size {filesize} bytes. Total time: {str(delta)}")
-                s2 = subprocess.run(["mv", os.path.join(root, "original/todo", file), os.path.join(root, "original/done", file)])
-                inference_file = (file.split(".")[0] if "." in file else file) + ".inferences"
-                s3 = subprocess.run(["mv", os.path.join(root, "original/todo", inference_file), os.path.join(root, "original/done", inference_file)])
-                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved input file {os.path.join(root, 'original/todo', file)} to {os.path.join(root, 'original/done', file)}.")
+                filename_avi = file.split(".")[0] + f"-{model_name}." + file.split(".")[1]
+                filename_pkl = filename_avi.split(".")[0] + ".inferences"
+                s2 = subprocess.run(["mv", os.path.join(root, "segmented", file), os.path.join(root, "segmented", filename_avi)])
+                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved output file {os.path.join(root, 'segmented', file)} to {os.path.join(root, 'segmented', filename_avi)}.")
+                if os.path.isfile(inference_file) is False:
+                    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- ERROR: Model {model_name} did not produce the expected output file {os.path.join(root, 'segmented', inference_file)}!")
+                    continue
+                s3 = subprocess.run(["mv", os.path.join(root, "segmented", inference_file), os.path.join(root, "segmented", filename_pkl)])
+                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved input file {os.path.join(root, 'segmented', inference_file)} to {os.path.join(root, 'segmented', filename_pkl)}.")
+                
+        s4 = subprocess.run(["mv", os.path.join(root, "original/todo", file), os.path.join(root, "original/done", file)])
+        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved input file {os.path.join(root, 'segmented', file)} to {os.path.join(root, 'segmented', file)}")
     time.sleep(30)
