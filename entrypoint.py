@@ -59,5 +59,5 @@ while True:
                 print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved input file {os.path.join(root, 'segmented', inference_file)} to {os.path.join(root, 'segmented', filename_pkl)}.")
                 
         s4 = subprocess.run(["mv", os.path.join(root, "original/todo", file), os.path.join(root, "original/done", file)])
-        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved input file {os.path.join(root, 'segmented', file)} to {os.path.join(root, 'segmented', file)}")
+        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved input file {os.path.join(root, 'original/todo', file)} to {os.path.join(root, 'original/done', file)}")
     time.sleep(30)
