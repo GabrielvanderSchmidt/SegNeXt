@@ -9,7 +9,9 @@ import warnings
 
 root = r"/home/videos"
 segnext = r"/home/SegNeXt"
-device = "cpu"
+device = os.environ["CUDA_VISIBLE_DEVICES"]
+device = f"cuda:{device}" if (isinstance(device, str) and len(device) == 1) else "cpu"
+print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Device set is {device}.\n\n\n")
 
 models = [
     ("pspnet_r50-d8", "pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth", "pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py"), # fps=4.07, mIoU=77.85
