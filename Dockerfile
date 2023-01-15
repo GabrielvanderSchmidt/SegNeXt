@@ -46,7 +46,8 @@ ENV PATH="/opt/conda/bin:$PATH"
 ENV FORCE_CUDA="1"
 
 # MMLAB
-RUN ["/bin/bash", "-c", "pip install mmcv-full==${MMCV} -f https://download.openmmlab.com/mmcv/dist/cu${CUDA//./}/torch${PYTORCH}/index.html"]
+RUN ["/bin/bash", "-c", "pip install mmcv-full==${MMCV}+torch${PYTORCH}+cu${CUDA} -f https://download.openmmlab.com/mmcv/dist/index.html"]
+# Fix from https://github.com/open-mmlab/mmediting/issues/117
 RUN pip install mmsegmentation==${MMSEG}
 
 CMD python3 /home/SegNeXt/entrypoint.py
