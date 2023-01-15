@@ -38,7 +38,7 @@ while True:
 
                 end = datetime.now()
                 delta = end - start
-                filesize = None if os.path.isfile(os.path.join(root, "segmented", file)) else if os.path.getsize(os.path.join(root, "segmented", file))
+                filesize = None if not os.path.isfile(os.path.join(root, "segmented", file)) else os.path.getsize(os.path.join(root, "segmented", file))
                 inference_file = (file.split(".")[0] if "." in file else file) + ".inferences"
                 if filesize is None:
                     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- ERROR: Model {model_name} did not produce the expected output file {os.path.join(root, 'segmented', file)}!")
