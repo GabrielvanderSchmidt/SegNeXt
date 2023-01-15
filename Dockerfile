@@ -21,7 +21,7 @@ WORKDIR /home
 RUN apt-get update \
     && apt-get install wget -y \
     && apt-get install git -y \
-    && git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git && \
+    && git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
     ca-certificates \
     g++ \
@@ -41,7 +41,6 @@ RUN apt-get update \
     && wget -nv https://download.openmmlab.com/mmsegmentation/v0.5/pspnet/pspnet_r50b-d32_512x1024_80k_cityscapes/pspnet_r50b-d32_512x1024_80k_cityscapes_20220311_152152-23bcaf8c.pth -P SegNeXt/checkpoints
 
 RUN git checkout gpu
-    
 
 ENV PATH="/opt/conda/bin:$PATH"
 ENV FORCE_CUDA="1"
