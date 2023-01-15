@@ -21,7 +21,7 @@ WORKDIR /home
 RUN apt-get update \
     && apt-get install wget -y \
     && apt-get install git -y \
-    && git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git && git checkout gpu \
+    && git clone https://github.com/GabrielvanderSchmidt/SegNeXt.git && git checkout gpu && \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
     ca-certificates \
     g++ \
