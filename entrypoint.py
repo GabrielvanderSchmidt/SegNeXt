@@ -12,9 +12,13 @@ segnext = r"/home/SegNeXt"
 device = "cpu"
 
 models = [
-    ("pspnet_r50-d8", "pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth", "pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py"), # Slower model, higher accuracy
-    ("pspnet_r18b-d8", "pspnet_r18b-d8_512x1024_80k_cityscapes_20201226_063116-26928a60.pth", "pspnet/pspnet_r18b-d8_512x1024_80k_cityscapes.py"), # Faster model, lower accuracy
-    # No model for night time, apparently?
+    ("pspnet_r50-d8", "pspnet_r50-d8_512x1024_40k_cityscapes_20200605_003338-2966598c.pth", "pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py"), # fps=4.07, mIoU=77.85
+    ("pspnet_r101-d8", "pspnet_r101-d8_512x1024_40k_cityscapes_20200604_232751-467e7cf4.pth", "pspnet/pspnet_r101-d8_512x1024_40k_cityscapes.py"), # fps=2.68, mIoU=78.34
+    ("pspnet_r18-d8", "pspnet_r18-d8_512x1024_80k_cityscapes_20201225_021458-09ffa746.pth", "pspnet/pspnet_r18-d8_512x1024_80k_cityscapes.py"), # fps=15.71, mIoU=74.87
+    ("pspnet_r18b-d8", "pspnet_r18b-d8_512x1024_80k_cityscapes_20201226_063116-26928a60.pth", "pspnet/pspnet_r18b-d8_512x1024_80k_cityscapes.py"), # fps=16.28, mIoU=74.23
+    ("pspnet_r50-d32", "pspnet_r50-d32_512x1024_80k_cityscapes_20220316_224840-9092b254.pth", "pspnet/pspnet_r50-d32_512x1024_80k_cityscapes.py"), # fps=15.21, mIoU=73.88
+    ("pspnet_r50b-d32_rsb", "pspnet_r50-d32_rsb-pretrain_512x1024_adamw_80k_cityscapes_20220316_141229-dd9c9610.pth", "pspnet/pspnet_r50-d32_rsb-pretrain_512x1024_adamw_80k_cityscapes.py"), # fps=16.08, mIoU=74.09
+    ("pspnet_r50b-d32", "pspnet_r50b-d32_512x1024_80k_cityscapes_20220311_152152-23bcaf8c.pth", "pspnet/pspnet_r50b-d32_512x1024_80k_cityscapes.py"), # fps=15.41, mIoU=72.61
     ]
 
 while True:
