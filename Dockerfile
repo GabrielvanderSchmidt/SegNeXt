@@ -1,5 +1,6 @@
 ARG PYTORCH="1.11.0"
 ARG CUDA="11.3"
+ARG CU="113"
 ARG CUDNN="8"
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 
@@ -46,7 +47,7 @@ ENV PATH="/opt/conda/bin:$PATH"
 ENV FORCE_CUDA="1"
 
 # MMLAB
-RUN ["/bin/bash", "-c", "pip install mmcv-full==${MMCV}+torch${PYTORCH}+cu${CUDA} -f https://download.openmmlab.com/mmcv/dist/index.html"]
+RUN ["/bin/bash", "-c", "pip install mmcv-full==${MMCV}+torch${PYTORCH}+cu${CU} -f https://download.openmmlab.com/mmcv/dist/index.html"]
 # Fix from https://github.com/open-mmlab/mmediting/issues/117
 RUN pip install mmsegmentation==${MMSEG}
 
