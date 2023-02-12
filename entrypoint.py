@@ -57,7 +57,7 @@ while True:
                     continue # Replace with exit() in the future?
                 else:
                     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Output file {os.path.join(root, 'segmented', file)} is size {filesize} bytes. Total time: {str(delta)}")
-                filename_avi = file.split(".")[0] + f"-{model_name}." + file.split(".")[1]
+                filename_avi = file.split(".")[0] + f"-{model_name}-{str(delta)}." + file.split(".")[1]
                 filename_pkl = filename_avi.split(".")[0] + ".inferences"
                 s2 = subprocess.run(["mv", os.path.join(root, "segmented", file), os.path.join(root, "segmented", filename_avi)])
                 print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t- Moved output file {os.path.join(root, 'segmented', file)} to {os.path.join(root, 'segmented', filename_avi)}.")

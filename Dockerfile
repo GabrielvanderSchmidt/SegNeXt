@@ -49,7 +49,7 @@ RUN apt-get update \
     && wget -nv https://download.openmmlab.com/mmsegmentation/v0.5/pspnet/pspnet_r50-d32_rsb-pretrain_512x1024_adamw_80k_cityscapes/pspnet_r50-d32_rsb-pretrain_512x1024_adamw_80k_cityscapes_20220316_141229-dd9c9610.pth -P SegNeXt/checkpoints \
     && wget -nv https://download.openmmlab.com/mmsegmentation/v0.5/pspnet/pspnet_r50b-d32_512x1024_80k_cityscapes/pspnet_r50b-d32_512x1024_80k_cityscapes_20220311_152152-23bcaf8c.pth -P SegNeXt/checkpoints
 
-CMD CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} python3 /home/SegNeXt/entrypoint.py
+CMD CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} python3 -u /home/SegNeXt/entrypoint.py
 ##########################################################
 #ARG PYTORCH="1.11.0"
 #ARG CUDA="11.3"
