@@ -7,6 +7,15 @@ from datetime import datetime
 
 import warnings
 
+import torch
+
+print(f"Cuda is available? {torch.cuda.is_available()}")
+print(f"Devices found: {torch.cuda.device_count()}")
+print(f"Current device: {torch.cuda.current_device()}")
+print("All devices:")
+for index, name in [(index, torch.cuda.get_device_name(index)) for index in range(torch.cuda.device_count())]:
+    print(f"\t{index}: {name}")
+
 root = r"/home/videos"
 segnext = r"/home/SegNeXt"
 device = os.environ["CUDA_VISIBLE_DEVICES"]
